@@ -4,6 +4,7 @@ using MagicVilla.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicVilla.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240226085906_addVillaNumberTable")]
+    partial class addVillaNumberTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,66 +75,66 @@ namespace MagicVilla.Migrations
                         {
                             Id = 1,
                             Amenity = "Villa 1 Amenity",
-                            CreatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1658),
+                            CreatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(918),
                             Details = "Villa 1 Details",
                             ImageUrl = "https://via.placeholder.com/150",
                             Name = "Villa 1",
                             Occupancy = 4,
                             Rate = 100.0,
                             Sqft = 1000,
-                            UpdatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1672)
+                            UpdatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(932)
                         },
                         new
                         {
                             Id = 2,
                             Amenity = "Villa 2 Amenity",
-                            CreatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1675),
+                            CreatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(934),
                             Details = "Villa 2 Details",
                             ImageUrl = "https://via.placeholder.com/150",
                             Name = "Villa 2",
                             Occupancy = 6,
                             Rate = 200.0,
                             Sqft = 2000,
-                            UpdatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1676)
+                            UpdatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(935)
                         },
                         new
                         {
                             Id = 3,
                             Amenity = "Villa 3 Amenity",
-                            CreatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1679),
+                            CreatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(936),
                             Details = "Villa 3 Details",
                             ImageUrl = "https://via.placeholder.com/150",
                             Name = "Villa 3",
                             Occupancy = 8,
                             Rate = 300.0,
                             Sqft = 3000,
-                            UpdatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1680)
+                            UpdatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(937)
                         },
                         new
                         {
                             Id = 4,
                             Amenity = "Villa 4 Amenity",
-                            CreatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1684),
+                            CreatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(939),
                             Details = "Villa 4 Details",
                             ImageUrl = "https://via.placeholder.com/150",
                             Name = "Villa 4",
                             Occupancy = 10,
                             Rate = 400.0,
                             Sqft = 4000,
-                            UpdatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1685)
+                            UpdatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(939)
                         },
                         new
                         {
                             Id = 5,
                             Amenity = "Villa 5 Amenity",
-                            CreatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1687),
+                            CreatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(941),
                             Details = "Villa 5 Details",
                             ImageUrl = "https://via.placeholder.com/150",
                             Name = "Villa 5",
                             Occupancy = 12,
                             Rate = 500.0,
                             Sqft = 5000,
-                            UpdatedAt = new DateTime(2024, 2, 29, 9, 14, 54, 589, DateTimeKind.Local).AddTicks(1687)
+                            UpdatedAt = new DateTime(2024, 2, 26, 15, 59, 5, 120, DateTimeKind.Local).AddTicks(941)
                         });
                 });
 
@@ -141,34 +144,20 @@ namespace MagicVilla.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SpecialDetails")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedDAt")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("villaId")
-                        .HasColumnType("int");
 
                     b.HasKey("VillaNo");
 
-                    b.HasIndex("villaId");
-
-                    b.ToTable("VillasNumber");
-                });
-
-            modelBuilder.Entity("MagicVilla.Models.VillaNumber", b =>
-                {
-                    b.HasOne("MagicVilla.Models.Villa", "Villa")
-                        .WithMany()
-                        .HasForeignKey("villaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Villa");
+                    b.ToTable("villasNumber");
                 });
 #pragma warning restore 612, 618
         }
